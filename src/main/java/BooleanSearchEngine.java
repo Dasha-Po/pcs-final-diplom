@@ -47,6 +47,7 @@ public class BooleanSearchEngine implements SearchEngine {
                             wordCount.put(word, new ArrayList<>());
                             wordCount.get(word).add(wordPageEntry);
                         }
+                        Collections.sort(wordCount.get(word)); // сортируем по кол-ву повторений на странице
                     }
                 }
             }
@@ -56,8 +57,15 @@ public class BooleanSearchEngine implements SearchEngine {
     @Override
     public List<PageEntry> search(String word) {
         // тут реализуйте поиск по слову
-        List<PageEntry> result = wordCount.get(word);
-        Collections.sort(result); // ответ должен быть отсортирован в порядке убывания поля count
+        String searchWord = word.toLowerCase();
+        List<PageEntry> result = null;
+
+        if (wordCount.get(searchWord) == null) {
+            System.out.println("Введенное слово не найдено в файлах");
+        } else {
+            result = wordCount.get(searchWord);
+        }
+
         return result;
     }
 }
