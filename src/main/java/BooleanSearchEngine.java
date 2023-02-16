@@ -58,12 +58,12 @@ public class BooleanSearchEngine implements SearchEngine {
     public List<PageEntry> search(String word) {
         // тут реализуйте поиск по слову
         String searchWord = word.toLowerCase();
-        List<PageEntry> result = null;
+        List<PageEntry> result = new ArrayList<>();
 
-        if (wordCount.get(searchWord) == null) {
-            System.out.println("Введенное слово не найдено в файлах");
-        } else {
+        if (wordCount.containsKey(searchWord)) {
             result = wordCount.get(searchWord);
+        } else {
+            System.out.println("Введенное слово не найдено в файлах");
         }
 
         return result;
